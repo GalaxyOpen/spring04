@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper>아래에 각종 쿼리문을 작성할 예정.
+ 스프링과 자바의 연결괼 역할. 연결을 하는 프레임 워크. -->
+
+<mapper namespace="Book" >
+    <insert id="save" parameterType ="com.icia.lib.DTO.BookDTO">
+        insert into book_table(bookName, bookPublisher, bookAuthor, bookPrice)
+        values (#{bookName},#{bookPublisher},#{bookAuthor},#{bookPrice})
+    </insert>
+
+    <select id ="findAll" resultType="book">
+        select * from book_table
+    </select>
+
+    <select id = "findById" resultType="book" parameterType="Long">
+        select * from book_table where id =#{id}
+    </select>
+    <!-- 넘겨 받은 값이 있으므로 parameterType도 있어야 한다.  -->
+    <update id ="update" parameterType="book">
+        update book_table set bookName=#{bookName}, bookPrice=#{bookPrice}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Long">
+        delete from book_table where id=#{id}
+    </delete>
+</mapper>
+
